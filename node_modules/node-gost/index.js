@@ -1,0 +1,13 @@
+module.exports = require('./lib/gostCrypto');
+require('./lib/gostASN1');
+require('./lib/gostCert');
+require('./lib/gostCipher');
+require('./lib/gostCMS');
+require('./lib/gostCoding');
+require('./lib/gostDigest');
+require('./lib/gostEngine');
+require('./lib/gostKeys');
+require('./lib/gostRandom');
+require('./lib/gostSecurity');
+require('./lib/gostSign');
+require('./lib/gostViewer');
