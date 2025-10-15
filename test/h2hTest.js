@@ -12,20 +12,20 @@ const __dirname = dirname(__filename);
 
 // Путь к файлу для сохранения токена
 const TOKEN_FILE_PATH = path.resolve(__dirname, "accessToken.json");
-const _CODE = 'EFB0dAca0FeD5639750c390d7eeE1a1FCa89F2'
-const _CLIENT_ID = '1958729756739688672'
-const _REDIRECT_URI = 'http://ya.ru'
-const _CLIENT_SECRET = 'rwhHCAJ6tTAoelFMOIgecDKS9EXEdD6z'
+const _CODE = 'Место для GrandCode'
+const _CLIENT_ID = 'Ваш clientId'
+const _REDIRECT_URI = 'Uri указанный для редиректа'
+const _CLIENT_SECRET = 'ваш clientSecret'
 
-// const verifier = new SignatureVerificationService('/Users/18701423/Downloads/00CA0721_тестовый корень Минцифры.cer');
+// const verifier = new SignatureVerificationService('Путь до сертификата .cer');
 
 const client = new ApiClient({
     conntectionTimeout: 60000,
     readTimeout: 60000,
     host: 'https://iftfintech.testsbi.sberbank.ru:9443',
-    p12Path: '/Users/18701423/Downloads/SBBAPI_1958729756739688672_173a5fe4-68f5-4014-91c7-1730e19e3324.p12',
-    caPath: '/Users/18701423/Documents/certs/минЦифры/russiantrustedca2024.pem',
-    p12Password: 'Yjubherb123',
+    p12Path: 'Путь до сертификата .p12',
+    caPath: 'Путь до сертификата (.pem)',
+    p12Password: 'Пароль от p12',
     enableLogs: true,
     maxRetries: 3,           // опционально: по умолчанию 3
     retryDelay: 1000,        // опционально: по умолчанию 1 сек
