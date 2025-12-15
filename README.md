@@ -38,7 +38,9 @@ const client = new ApiClient({
     readTimeout: 60000,
     host: 'https://iftfintech.testsbi.sberbank.ru:9443',
     p12Path: '/SBBAPI_1958729756739688672_173a5fe4-68f5-4014-91c7-1730e19e3324.p12',
-    caPath: '/russiantrustedca2024.pem',
+    //Для промышленной эксплуатации необходимо передать все сертификаты цепочки. 
+    // Пример: caPath: ['/Users/admin/certs/sberca-ext.crt', '/Users/admin/certs/sberca-root-ext.crt'],
+    caPath: '/russiantrustedca2024.pem', 
     p12Password: 'certpass',
     enableLogs: true,
     maxRetries: 3,           // опционально: по умолчанию 3
