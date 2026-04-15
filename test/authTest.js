@@ -12,27 +12,30 @@ const __dirname = dirname(__filename);
 
 // Путь к файлу для сохранения токена
 const TOKEN_FILE_PATH = path.resolve(__dirname, "accessToken.json");
-const _CODE = '2dABd10e4ceed3c4fB7179D09C9B18473b07F6'
-const _CLIENT_ID = '1958729756739688672'
+const _CODE = 'd7C8FDdD4aBdE35B4Ecef3BD42adBD07AEFBcb'
 const _REDIRECT_URI = 'http://ya.ru'
-const _CLIENT_SECRET = 'rwhHCAJ6tTAoelFMOIgecDKS9EXEdD6z'
 
-const verifier = new SignatureVerificationService('/Users/18701423/Downloads/00CA0721_тестовый корень Минцифры.cer');
+//PROM
+const _CLIENT_SECRET = 'secret'
+const _CLIENT_ID = '1111'
+
+const verifier = new SignatureVerificationService('Путь/00CA0721_тестовый корень Минцифры.cer');
 
 const client = new ApiClient({
     conntectionTimeout: 60000,
     readTimeout: 60000,
     host: 'https://iftfintech.testsbi.sberbank.ru:9443',
-    p12Path: '/Users/18701423/Downloads/SBBAPI_1958729756739688672_173a5fe4-68f5-4014-91c7-1730e19e3324.p12',
-    caPath: '/Users/18701423/Documents/certs/минЦифры/russiantrustedca2024.pem',
+    p12Path: 'Путь/SBBAPI_1958729756739688672_173a5fe4-68f5-4014-91c7-1730e19e3324.p12',
+    caPath: 'Путь/certs/минЦифры/russiantrustedca2024.pem',
     p12Password: 'Yjubherb123',
+
     enableLogs: true,
     maxRetries: 3,           // опционально: по умолчанию 3
     retryDelay: 1000,        // опционально: по умолчанию 1 сек
 });
 
 async function main() {
-    // await getAccessToken();
+    await getAccessToken();
     // await getRefreshToken();
     // await getRevokeToken();
     // await getChangeClientSecret();

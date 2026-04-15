@@ -12,20 +12,39 @@ const __dirname = dirname(__filename);
 
 // Путь к файлу для сохранения токена
 const TOKEN_FILE_PATH = path.resolve(__dirname, "accessToken.json");
-const _CODE = 'EFB0dAca0FeD5639750c390d7eeE1a1FCa89F2'
-const _CLIENT_ID = '1958729756739688672'
+const _CODE = 'd7C8FDdD4aBdE35B4Ecef3BD42adBD07AEFBcb'
 const _REDIRECT_URI = 'http://ya.ru'
-const _CLIENT_SECRET = 'rwhHCAJ6tTAoelFMOIgecDKS9EXEdD6z'
 
-// const verifier = new SignatureVerificationService('/Users/18701423/Downloads/00CA0721_тестовый корень Минцифры.cer');
+//PROM
+const _CLIENT_SECRET = 'secret'
+const _CLIENT_ID = '1111'
+
+const verifier = new SignatureVerificationService('Путь/00CA0721_тестовый корень Минцифры.cer');
 
 const client = new ApiClient({
     conntectionTimeout: 60000,
     readTimeout: 60000,
     host: 'https://iftfintech.testsbi.sberbank.ru:9443',
-    p12Path: '/Users/18701423/Downloads/SBBAPI_1958729756739688672_173a5fe4-68f5-4014-91c7-1730e19e3324.p12',
-    caPath: '/Users/18701423/Documents/certs/минЦифры/russiantrustedca2024.pem',
+    p12Path: 'Путь/SBBAPI_1958729756739688672_173a5fe4-68f5-4014-91c7-1730e19e3324.p12',
+    caPath: 'Путь/certs/минЦифры/russiantrustedca2024.pem',
     p12Password: 'Yjubherb123',
+
+    enableLogs: true,
+    maxRetries: 3,           // опционально: по умолчанию 3
+    retryDelay: 1000,        // опционально: по умолчанию 1 сек
+});
+
+
+const verifier = new SignatureVerificationService('Путь/00CA0721_тестовый корень Минцифры.cer');
+
+const client = new ApiClient({
+    conntectionTimeout: 60000,
+    readTimeout: 60000,
+    host: 'https://iftfintech.testsbi.sberbank.ru:9443',
+    p12Path: 'Путь/сббапи.p12',
+    caPath: 'Путь/russiantrustedca2024.pem',
+    p12Password: '1qaz2wsx',
+
     enableLogs: true,
     maxRetries: 3,           // опционально: по умолчанию 3
     retryDelay: 1000,        // опционально: по умолчанию 1 сек
@@ -46,7 +65,7 @@ async function main() {
     // await printCert();
     // await getCertState();
     // await getCertStateEIO();
-    await createPayment();
+    // await createPayment();
     // await getPayment();
     // await getPaymentDocState();
     // await getStatementSummary();
@@ -55,6 +74,8 @@ async function main() {
     // await createPayroll();
     // await getPayroll();
     // await getPayrollState();
+    await createPaymentLink();
+    await getPaymentLinkList();
 }
 
 async function getAccessToken() {
@@ -73,7 +94,7 @@ async function getAccessToken() {
 
         console.log('Проверка jwt:')
         // Сервис проверки JWT использует Java 1.8
-        // let verifyJwtResult = verifier.verifyJwt(result.id_token)
+        let verifyJwtResult = verifier.verifyJwt(result.id_token)
         // console.log(JSON.stringify(verifyJwtResult))
 
     } catch (error) {
@@ -486,6 +507,50 @@ async function getPayrollState() {
         // Добавляем await здесь
         const result = await h2hClient.getPayrollState(
             accessToken, "39cea241-fab2-415a-9fc0-19c9c4187d8b")
+
+        console.log('Response data:', JSON.stringify(JSON.stringify(data, null, 2), null, 2));
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+}
+
+async function createPaymentLink() {
+    try {
+        const accessToken = loadAccessToken();
+
+        // Добавляем await здесь
+        const result = await h2hClient.createPaymentLink(
+            accessToken,
+            {
+                "linkData": {
+                    "linkType": "reusable",
+                    "account": "40702810238710020932",
+                    "amount": "1700902",
+                    "takeTax": true,
+                    "totalTaxAmount": "1000",
+                    "dayLife": "2025-12-06",
+                    "paymentPurpose": "!!!",
+                    "linkName": "1",
+                    "redirectUrl": "http://ya.ru",
+                    "brandName": "Код"
+                }
+            }    
+        );
+
+        console.log('Response data:', JSON.stringify(JSON.stringify(data, null, 2), null, 2));
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+}
+
+async function getPaymentLinkList() {
+    try {
+        const accessToken = loadAccessToken();
+
+        // Добавляем await здесь
+        const result = await h2hClient.getPaymentLinkList(
+            accessToken, "7edbfe51-e1d0-42f7-a8a7-f5cfdfacd313"    
+        )
 
         console.log('Response data:', JSON.stringify(JSON.stringify(data, null, 2), null, 2));
     } catch (error) {
