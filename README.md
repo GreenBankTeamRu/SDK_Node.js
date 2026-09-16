@@ -18,7 +18,7 @@ npm pack
 
 Установка в свой проект `.tgz`-архива.
 ```bash
-npm install ./sber-business-api-1.0.1.thz
+npm install ./sber-business-api-01.002.01.thz
 ```
 
 ---
